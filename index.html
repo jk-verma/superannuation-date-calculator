@@ -56,7 +56,12 @@
 
     /* Special full-width row to span Month + Day + Year widths */
     .date-row.full-span {
-        grid-template-columns: calc(70px + 8px + 70px + 8px + 80px) 1fr;
+        grid-template-columns: 70px 70px 80px;
+    }
+
+    .date-row.full-span select {
+        grid-column: 1 / -1;
+        width: 100%;
     }
 
     .year-picker {
