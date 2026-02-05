@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+```
 <style>
     html, body {
         height: 100%;
@@ -73,10 +74,10 @@
 
     .calendar-icon {
         cursor: pointer;
-        width: 22px;
-        height: 22px;
-        vertical-align: middle;
-        margin-left: 4px;
+        font-size: 20px;
+        line-height: 1;
+        margin-left: 6px;
+        user-select: none;
     }
 
     .calendar-trigger {
@@ -138,6 +139,7 @@
         }
     }
 </style>
+```
 
 </head>
 <body>
@@ -145,13 +147,14 @@
 <div class="container">
     <h2>Superannuation Date Calculator</h2>
 
+```
 <div class="field-group">
     <label>Date of Birth</label>
     <select id="dobMonth"></select>
     <select id="dobDay"></select>
     <input type="text" id="dobYear" placeholder="Year">
     <input type="text" id="dobPicker" class="calendar-trigger" readonly>
-    <img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png" class="calendar-icon" onclick="openCalendar('dob')">
+    <span class="calendar-icon" onclick="openCalendar('dob')">📅</span>
 </div>
 
 <div class="field-group">
@@ -160,7 +163,7 @@
     <select id="asOnDay"></select>
     <input type="text" id="asOnYear" placeholder="Year">
     <input type="text" id="asOnPicker" class="calendar-trigger" readonly>
-    <img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png" class="calendar-icon" onclick="openCalendar('asOn')">
+    <span class="calendar-icon" onclick="openCalendar('asOn')">📅</span>
 </div>
 
 <div class="field-group">
@@ -179,7 +182,7 @@
 <footer>
     © 2025 Superannuation Date Calculator. All rights reserved.
 </footer>
-
+```
 
 </div>
 
@@ -269,14 +272,12 @@ function calculateSuperannuation() {
         rm += 12;
     }
 
-    result.innerHTML = `
-        <strong>Age / Service as on date:</strong><br>
-        ${y} Years, ${m} Months, ${d} Days<br><br>
-        <strong>Superannuation Age:</strong> ${superAge} Years<br>
-        <strong>Date of Superannuation:</strong> ${retirement.toDateString()}<br><br>
-        <strong>Remaining Service:</strong><br>
-        ${ry} Years, ${rm} Months, ${rd} Days
-    `;
+    result.innerHTML = '<strong>Age / Service as on date:</strong><br>' +
+        y + ' Years, ' + m + ' Months, ' + d + ' Days<br><br>' +
+        '<strong>Superannuation Age:</strong> ' + superAge + ' Years<br>' +
+        '<strong>Date of Superannuation:</strong> ' + retirement.toDateString() + '<br><br>' +
+        '<strong>Remaining Service:</strong><br>' +
+        ry + ' Years, ' + rm + ' Months, ' + rd + ' Days';
 }
 </script>
 
