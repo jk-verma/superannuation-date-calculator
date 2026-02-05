@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-
 <style>
     html, body {
         height: 100%;
@@ -51,6 +50,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        width: 100%;
     }
 
     .year-picker {
@@ -78,14 +78,6 @@
         right: 6px;
         font-size: 16px;
         cursor: pointer;
-    }
-
-    .year-picker input[type="text"] {
-        padding-right: 26px;
-    }
-
-    .year-picker .calendar-icon {
-        cursor: pointer;
         user-select: none;
     }
 
@@ -107,15 +99,6 @@
 
     input[type="text"] {
         width: 80px;
-    }
-
-    .calendar-icon {
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 1;
-        margin-left: 2px;
-        margin-top: 1px;
-        user-select: none;
     }
 
     .calendar-trigger {
@@ -171,14 +154,13 @@
     }
 </style>
 
-
 </head>
 <body>
 
 <div class="container">
     <h2>Superannuation Date Calculator</h2>
 
-
+```
 <div class="field-group">
     <label>Date of Birth</label>
     <div class="date-row">
@@ -207,11 +189,13 @@
 
 <div class="field-group">
     <label>Superannuation Age</label>
-    <select id="retAge" style="width:100%">
+    <div class="date-row">
+        <select id="retAge" style="width:100%">
         <option value="60">60 Years – General Central Govt</option>
         <option value="62">62 Years – Doctors / Scientists</option>
         <option value="65">65 Years – Professors / Special Cadre</option>
     </select>
+    </div>
 </div>
 
 <button onclick="calculateSuperannuation()">Calculate Superannuation</button>
@@ -221,7 +205,7 @@
 <footer>
     © 2025 Superannuation Date Calculator. All rights reserved.
 </footer>
-
+```
 
 </div>
 
