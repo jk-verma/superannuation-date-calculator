@@ -48,10 +48,15 @@
 
     .date-row {
         display: grid;
-        grid-template-columns: 70px 70px 1fr;
+        grid-template-columns: 70px 70px auto;
         align-items: center;
         gap: 8px;
         width: 100%;
+    }
+
+    /* Special full-width row to span Month + Day + Year widths */
+    .date-row.full-span {
+        grid-template-columns: calc(70px + 8px + 70px + 8px + 80px) 1fr;
     }
 
     .year-picker {
@@ -190,7 +195,7 @@
 
 <div class="field-group">
     <label>Superannuation Age</label>
-    <div class="date-row">
+    <div class="date-row full-span">
         <select id="retAge" style="width:100%">
             <option value="60">60 Years – General Central Govt</option>
             <option value="62">62 Years – Doctors / Scientists</option>
@@ -204,13 +209,17 @@
 <div id="result"></div>
 
 <footer>
-    © 2025 Superannuation Date Calculator. All rights reserved.
+    © <span id="currentYear"></span> Superannuation Date Calculator. All rights reserved.
 </footer>
 ```
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
 
 <script>
 const calendarRefs = {};
