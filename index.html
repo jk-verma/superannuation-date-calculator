@@ -54,9 +54,20 @@
     }
 
     .year-picker {
+        position: relative;
         display: flex;
         align-items: center;
-        gap: 4px;
+    }
+
+    .year-picker input[type="text"] {
+        padding-right: 26px;
+    }
+
+    .year-picker .calendar-icon {
+        position: absolute;
+        right: 6px;
+        font-size: 16px;
+        cursor: pointer;
     }
 
     .field-group label {
@@ -82,10 +93,6 @@
 
     .calendar-icon {
         cursor: pointer;
-        font-size: 18px;
-        line-height: 1;
-        margin-left: 2px;
-        margin-top: 1px;
         user-select: none;
     }
 
@@ -183,7 +190,7 @@
 
 <div class="field-group">
     <label>Superannuation Age</label>
-    <select id="retAge" style="width:220px">
+    <select id="retAge" style="width:100%">
         <option value="60">60 Years – General Central Govt</option>
         <option value="62">62 Years – Doctors / Scientists</option>
         <option value="65">65 Years – Professors / Special Cadre</option>
