@@ -44,7 +44,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 15px;
         position: relative;
     }
@@ -58,14 +58,15 @@
 
     .field-group select,
     .field-group input[type="text"] {
-        margin-right: 5px;
-        padding: 6px;
-        border: 1px solid #b0bec5;
-        border-radius: 4px;
+        width: 80px;
+        height: 34px;
+    }       height: 34px;
+        box-sizing: border-box;
     }
 
     select {
         width: 70px;
+        height: 34px;
     }
 
     input[type="text"] {
@@ -153,7 +154,7 @@
     <label>Date of Birth</label>
     <select id="dobMonth"></select>
     <select id="dobDay"></select>
-    <div style="display:flex;align-items:center;gap:2px">
+    <div style="display:flex;align-items:center;gap:2px; height:34px">
     <input type="text" id="dobYear" placeholder="Year" style="margin-right:0">
     <input type="text" id="dobPicker" class="calendar-trigger" readonly>
     <span class="calendar-icon" onclick="openCalendar('dob')">📅</span>
@@ -164,7 +165,7 @@
     <label>Age / Service As On Date</label>
     <select id="asOnMonth"></select>
     <select id="asOnDay"></select>
-    <div style="display:flex;align-items:center;gap:2px">
+    <div style="display:flex;align-items:center;gap:2px; height:34px">
     <input type="text" id="asOnYear" placeholder="Year" style="margin-right:0">
     <input type="text" id="asOnPicker" class="calendar-trigger" readonly>
     <span class="calendar-icon" onclick="openCalendar('asOn')">📅</span>
