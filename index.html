@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-
+```
 <style>
     html, body {
         height: 100%;
@@ -140,7 +140,7 @@
         }
     }
 </style>
-
+```
 
 </head>
 <body>
@@ -153,18 +153,22 @@
     <label>Date of Birth</label>
     <select id="dobMonth"></select>
     <select id="dobDay"></select>
-    <input type="text" id="dobYear" placeholder="Year" style="margin-right:2px">
+    <div style="display:flex;align-items:center;gap:2px">
+    <input type="text" id="dobYear" placeholder="Year" style="margin-right:0">
     <input type="text" id="dobPicker" class="calendar-trigger" readonly>
     <span class="calendar-icon" onclick="openCalendar('dob')">📅</span>
+    </div>
 </div>
 
 <div class="field-group">
     <label>Age / Service As On Date</label>
     <select id="asOnMonth"></select>
     <select id="asOnDay"></select>
-    <input type="text" id="asOnYear" placeholder="Year" style="margin-right:2px">
+    <div style="display:flex;align-items:center;gap:2px">
+    <input type="text" id="asOnYear" placeholder="Year" style="margin-right:0">
     <input type="text" id="asOnPicker" class="calendar-trigger" readonly>
     <span class="calendar-icon" onclick="openCalendar('asOn')">📅</span>
+    </div>
 </div>
 
 <div class="field-group">
@@ -183,7 +187,7 @@
 <footer>
     © 2025 Superannuation Date Calculator. All rights reserved.
 </footer>
-
+```
 
 </div>
 
