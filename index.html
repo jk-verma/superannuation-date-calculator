@@ -42,9 +42,21 @@
 
     .field-group {
         display: grid;
-        grid-template-columns: 160px 1fr;
+        grid-template-columns: 170px 1fr;
         align-items: center;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
+    }
+
+    .date-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .year-picker {
+        display: flex;
+        align-items: center;
+        gap: 4px;
     }
 
     .field-group label {
@@ -145,34 +157,28 @@
 ```
 <div class="field-group">
     <label>Date of Birth</label>
-    <div class="field-group">
-    <label>Date of Birth</label>
-    <div style="display:flex;gap:6px;align-items:center">
+    <div class="date-row">
         <select id="dobMonth"></select>
         <select id="dobDay"></select>
-        <div style="display:flex;align-items:center;gap:4px">
-            <input type="text" id="dobYear" placeholder="Year" style="width:80px">
+        <div class="year-picker">
+            <input type="text" id="dobYear" placeholder="Year">
             <input type="text" id="dobPicker" class="calendar-trigger" readonly>
             <span class="calendar-icon" onclick="openCalendar('dob')">📅</span>
         </div>
     </div>
 </div>
-</div>
 
 <div class="field-group">
     <label>Age / Service As On Date</label>
-    <div class="field-group">
-    <label>Age / Service As On Date</label>
-    <div style="display:flex;gap:6px;align-items:center">
+    <div class="date-row">
         <select id="asOnMonth"></select>
         <select id="asOnDay"></select>
-        <div style="display:flex;align-items:center;gap:4px">
-            <input type="text" id="asOnYear" placeholder="Year" style="width:80px">
+        <div class="year-picker">
+            <input type="text" id="asOnYear" placeholder="Year">
             <input type="text" id="asOnPicker" class="calendar-trigger" readonly>
             <span class="calendar-icon" onclick="openCalendar('asOn')">📅</span>
         </div>
     </div>
-</div>
 </div>
 
 <div class="field-group">
