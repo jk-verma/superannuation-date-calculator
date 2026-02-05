@@ -57,6 +57,27 @@
         position: relative;
         display: flex;
         align-items: center;
+        height: 34px;
+        background: #ffffff;
+        border: 1px solid #b0bec5;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .year-picker input[type="text"] {
+        border: none;
+        outline: none;
+        height: 100%;
+        padding: 0 28px 0 8px;
+        width: 80px;
+        box-sizing: border-box;
+    }
+
+    .year-picker .calendar-icon {
+        position: absolute;
+        right: 6px;
+        font-size: 16px;
+        cursor: pointer;
     }
 
     .year-picker input[type="text"] {
@@ -74,10 +95,9 @@
         font-weight: 600;
     }
 
-    .field-group select,
-    .field-group input[type="text"] {
-        width: 80px;
+    .field-group select {
         height: 34px;
+        box-sizing: border-box;
     }
 
     select {
