@@ -47,7 +47,8 @@
     }
 
     .date-row {
-        display: flex;
+        display: grid;
+        grid-template-columns: 70px 70px 1fr;
         align-items: center;
         gap: 8px;
         width: 100%;
@@ -175,7 +176,7 @@
 </div>
 
 <div class="field-group">
-    <label>Age / Service As On Date</label>
+    <label>Age As On Date</label>
     <div class="date-row">
         <select id="asOnMonth"></select>
         <select id="asOnDay"></select>
@@ -191,10 +192,10 @@
     <label>Superannuation Age</label>
     <div class="date-row">
         <select id="retAge" style="width:100%">
-        <option value="60">60 Years – General Central Govt</option>
-        <option value="62">62 Years – Doctors / Scientists</option>
-        <option value="65">65 Years – Professors / Special Cadre</option>
-    </select>
+            <option value="60">60 Years – General Central Govt</option>
+            <option value="62">62 Years – Doctors / Scientists</option>
+            <option value="65">65 Years – Professors / Special Cadre</option>
+        </select>
     </div>
 </div>
 
@@ -295,7 +296,7 @@ function calculateSuperannuation() {
         rm += 12;
     }
 
-    result.innerHTML = '<strong>Age / Service as on date:</strong><br>' +
+    result.innerHTML = '<strong>Age as on date:</strong><br>' +
         y + ' Years, ' + m + ' Months, ' + d + ' Days<br><br>' +
         '<strong>Superannuation Age:</strong> ' + superAge + ' Years<br>' +
         '<strong>Date of Superannuation:</strong> ' + retirement.toDateString() + '<br><br>' +
