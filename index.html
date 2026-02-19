@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superannuation Date Calculator</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 480px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #01579b;
+    }
+
+    .field-group {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .date-row {
+        display: grid;
+        grid-template-columns: 70px 70px auto;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    /* Special full-width row to span Month + Day + Year widths */
+    .date-row.full-span {
+        grid-template-columns: 70px 70px 60px;
+        column-gap: 8px;
+        width: calc(70px + 70px + 80px + 16px);
+    }
+
+    .date-row.full-span select {
+        grid-column: 1 / -1;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .year-picker {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 34px;
+        background: #ffffff;
+        border: 1px solid #b0bec5;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .year-picker input[type="text"] {
+        border: none;
+        outline: none;
+        height: 100%;
+        padding: 0 28px 0 8px;
+        width: 80px;
+        box-sizing: border-box;
+    }
+
+    .year-picker .calendar-icon {
+        position: absolute;
+        right: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .field-group label {
+        margin: 0;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+    .field-group select {
+        height: 34px;
+        box-sizing: border-box;
+    }
+
+    select {
+        width: 70px;
+        height: 34px;
+    }
+
+    input[type="text"] {
+        width: 80px;
+    }
+
+    .calendar-trigger {
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        border: none;
+        pointer-events: none;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #0288d1;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #0277bd;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 1.05em;
+        color: #37474f;
+        text-align: center;
+        background: #f1f8ff;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    footer {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9em;
+        color: #607d8b;
+        margin-top: 20px;
+    }
+
+    .flatpickr-calendar {
+        z-index: 9999 !important;
+    }
+
+    @media (max-width: 599px) {
+        .field-group {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Superannuation Date Calculator</h2>
+
+
+<div class="field-group">
+    <label>Date of Birth</label>
+    <div class="date-row">
+        <select id="dobMonth"></select>
+        <select id="dobDay"></select>
+        <div class="year-picker">
+            <input type="text" id="dobYear" placeholder="Year">
+            <input type="text" id="dobPicker" class="calendar-trigger" readonly>
+            <span class="calendar-icon" onclick="openCalendar('dob')">📅</span>
+        </div>
+    </div>
+</div>
+
+<div class="field-group">
+    <label>Age As On Date</label>
+    <div class="date-row">
+        <select id="asOnMonth"></select>
+        <select id="asOnDay"></select>
+        <div class="year-picker">
+            <input type="text" id="asOnYear" placeholder="Year">
+            <input type="text" id="asOnPicker" class="calendar-trigger" readonly>
+            <span class="calendar-icon" onclick="openCalendar('asOn')">📅</span>
+        </div>
+    </div>
+</div>
+
+<div class="field-group">
+    <label>Superannuation Age</label>
+    <div class="date-row full-span">
+        <select id="retAge" style="width:100%">
+            <option value="60">60 Years – General Central Govt</option>
+            <option value="62">62 Years – Doctors / Scientists</option>
+            <option value="65">65 Years – Professors / Special Cadre</option>
+        </select>
+    </div>
+</div>
+
+<button onclick="calculateSuperannuation()">Calculate Superannuation</button>
+
+<div id="result"></div>
+
+<footer>
+    © <span id="currentYear"></span> Superannuation Date Calculator. All rights reserved.
+</footer>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+<script>
+const calendarRefs = {};
+
+function populateDaysAndMonths(dayId, monthId) {
+    const daySelect = document.getElementById(dayId);
+    const monthSelect = document.getElementById(monthId);
+
+    for (let i = 1; i <= 31; i++) {
+        daySelect.add(new Option(i, i));
+    }
+
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    months.forEach((m, i) => monthSelect.add(new Option(m, i)));
+}
+
+function setToday(prefix) {
+    const d = new Date();
+    document.getElementById(prefix + 'Year').value = d.getFullYear();
+    document.getElementById(prefix + 'Month').value = d.getMonth();
+    document.getElementById(prefix + 'Day').value = d.getDate();
+}
+
+function setupFlatpickr(prefix) {
+    const picker = document.getElementById(prefix + 'Picker');
+    calendarRefs[prefix] = flatpickr(picker, {
+        defaultDate: new Date(),
+        disableMobile: true,
+        onChange: function (selectedDates) {
+            const date = selectedDates[0];
+            document.getElementById(prefix + 'Year').value = date.getFullYear();
+            document.getElementById(prefix + 'Month').value = date.getMonth();
+            document.getElementById(prefix + 'Day').value = date.getDate();
+        }
+    });
+}
+
+function openCalendar(prefix) {
+    calendarRefs[prefix].open();
+}
+
+populateDaysAndMonths('dobDay', 'dobMonth');
+populateDaysAndMonths('asOnDay', 'asOnMonth');
+
+setToday('dob');
+setToday('asOn');
+
+setupFlatpickr('dob');
+setupFlatpickr('asOn');
+
+function calculateSuperannuation() {
+    const dob = new Date(dobYear.value, dobMonth.value, dobDay.value);
+    const asOn = new Date(asOnYear.value, asOnMonth.value, asOnDay.value);
+    const superAge = parseInt(retAge.value);
+
+    let y = asOn.getFullYear() - dob.getFullYear();
+    let m = asOn.getMonth() - dob.getMonth();
+    let d = asOn.getDate() - dob.getDate();
+
+    if (d < 0) {
+        m--;
+        d += new Date(asOn.getFullYear(), asOn.getMonth(), 0).getDate();
+    }
+    if (m < 0) {
+        y--;
+        m += 12;
+    }
+
+    let retirement = new Date(dob);
+    retirement.setFullYear(retirement.getFullYear() + superAge);
+    retirement = new Date(retirement.getFullYear(), retirement.getMonth() + 1, 0);
+
+    let ry = retirement.getFullYear() - asOn.getFullYear();
+    let rm = retirement.getMonth() - asOn.getMonth();
+    let rd = retirement.getDate() - asOn.getDate();
+
+    if (rd < 0) {
+        rm--;
+        rd += new Date(asOn.getFullYear(), asOn.getMonth(), 0).getDate();
+    }
+    if (rm < 0) {
+        ry--;
+        rm += 12;
+    }
+
+    result.innerHTML = '<strong>Age as on date:</strong><br>' +
+        y + ' Years, ' + m + ' Months, ' + d + ' Days<br><br>' +
+        '<strong>Superannuation Age:</strong> ' + superAge + ' Years<br>' +
+        '<strong>Date of Superannuation:</strong> ' + retirement.toDateString() + '<br><br>' +
+        '<strong>Remaining Service:</strong><br>' +
+        ry + ' Years, ' + rm + ' Months, ' + rd + ' Days';
+}
+</script>
+
+</body>
+</html>
